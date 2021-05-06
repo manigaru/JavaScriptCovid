@@ -4,7 +4,7 @@ import { pincodeResults } from '../store/actions/availabilityAction';
 import SlotDetails from '../components/SlotDetails';
 import {Form, Button} from 'react-bootstrap';
 
-function checkAvailability(props) {
+function CheckAvailability(props) {
     const [pincode, setPincode] = useState("");
     const [age, setAge] = useState("");
 
@@ -48,4 +48,4 @@ function mapDispatchToProps (dispatch) {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(checkAvailability);
+export default connect(mapStateToProps, mapDispatchToProps)(CheckAvailability);
