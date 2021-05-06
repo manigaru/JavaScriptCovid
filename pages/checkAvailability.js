@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { pincodeResults } from '../store/actions/availabilityAction';
+import SlotDetails from '../components/SlotDetails';
 
 function checkAvailability(props) {
     const [pincode, setPincode] = useState("");
@@ -22,13 +23,14 @@ function checkAvailability(props) {
                 <input type = "number" value = {age} onChange = {e => setAge(e.target.value)} required />
                 <input type="submit" value="Submit"/>
             </form>
+            <SlotDetails slots={props.slots}/>
         </div>
     )
     
 }
 function mapStateToProps(state) {
     return {
-        
+        slots: state.availability.result
     }
 }
 
