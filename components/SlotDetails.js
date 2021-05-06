@@ -1,10 +1,12 @@
 import React from 'react';
+import { Container } from 'react-bootstrap';
 import Slot from './Slot';
 
 function SlotDetails({slots}) {
     if(slots != undefined && slots.length != 0) {
         return (
-            <div>
+            <div className="container py-5">
+                <h2 className="text-center">Available Slots</h2>
                 {
                     slots && slots.map((slt, key) => {
                         return (
@@ -16,7 +18,7 @@ function SlotDetails({slots}) {
         ) 
     } else if(slots != undefined && slots.length == 0) {
         return (
-            <div>No Slots Available</div>
+            <h3 className="mt-4">No Slots Available</h3>
         )
     } else {
         return (

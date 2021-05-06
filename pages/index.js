@@ -1,15 +1,15 @@
 import Head from 'next/head';
-import {Navbar, Nav, NavDropdown, Button} from 'react-bootstrap';
+import NavBar from '../components/NavBar';
 
 export default function Home() {
   return (
     <div className="container">
       <Head>
-        <title>Create Next App</title>
+        <title>Covid19 Vaccine Notifier</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <h2>Hello World!!</h2>
+        <NavBar/>
       </main>
     </div>
   )
