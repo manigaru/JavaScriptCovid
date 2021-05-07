@@ -1,14 +1,17 @@
-import { Form, Button, Col, InputGroup } from 'react-bootstrap';
 import { useState } from 'react';
+import { connect } from 'react-redux';
+import { Form, Button, InputGroup } from 'react-bootstrap';
 
-export default function SignUp(props) {
+import { registerUser } from '../store/actions/authAction';
+
+function SignUp(props) {
     const [formState, setFormState] = useState({
         name: "",
         email: "",
         password: "",
         confirmPassword: "",
         pincode: "",
-        age: "",
+        age: 0,
         preferredVaccine: "ANY"
     })
 
@@ -19,6 +22,7 @@ export default function SignUp(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        props.registerUser(formState);
     }
 
     return (
@@ -169,3 +173,17 @@ export default function SignUp(props) {
         </div>
     )
 }
+
+function mapStateToProps(state) {
+    return {
+        user: state.auth.result
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        registerUser: (data) => dispatch(registerUser(data))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

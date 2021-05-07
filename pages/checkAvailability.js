@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { pincodeResults } from '../store/actions/availabilityAction';
-import SlotDetails from '../components/SlotDetails';
+import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
+
+import SlotDetails from '../components/SlotDetails';
+import { pincodeResults } from '../store/actions/availabilityAction';
 
 function CheckAvailability(props) {
     const [pincode, setPincode] = useState("");
@@ -36,6 +37,7 @@ function CheckAvailability(props) {
     )
 
 }
+
 function mapStateToProps(state) {
     return {
         slots: state.availability.result
