@@ -12,7 +12,7 @@ export const registerUser = (data) => async dispatch => {
             data: data,
         }
 
-        let user = await (await axios(config)).data.user;
+        let user = await (await axios(config)).data;
         await dispatch({
             type: 'SIGNUP_SUCCESS',
             result: user
@@ -21,6 +21,36 @@ export const registerUser = (data) => async dispatch => {
     } catch (error) {
         await dispatch({
             type: 'SIGNUP_ERROR',
+            error: error
+        })
+    }
+}
+
+export const loginUser = (data) => async dispatch => {
+    try {
+
+        let config = {
+            method: 'POST',
+            url: 'http://vaccine-notifier-api.agarwal.work/api/login',
+            data: data,
+        }
+
+        let user = await (await axios(config)).data;
+
+        if (user.token) {
+            axios.defaults.headers.common['Authorization'] = user.token
+        } else {
+            throw new Error("Token not found")
+        }
+
+        await dispatch({
+            type: 'LOGIN_SUCCESS',
+            result: user
+        })
+
+    } catch (error) {
+        await dispatch({
+            type: 'LOGIN_ERROR',
             error: error
         })
     }
