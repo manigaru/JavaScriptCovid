@@ -17,7 +17,6 @@ function SignUp(props) {
 
     const onChange = (e) => {
         setFormState({ ...formState, [e.target.name]: e.target.value });
-        console.log(formState)
     }
 
     const handleSubmit = (e) => {
@@ -33,11 +32,11 @@ function SignUp(props) {
                     <InputGroup hasValidation>
                         <Form.Control
                             name="name"
-                            required
                             type="text"
                             placeholder="Enter Name"
                             value={formState.name}
                             onChange={onChange}
+                            required
                         />
                         <Form.Control.Feedback type="invalid" tooltip>
                             Please provide a valid name.
@@ -50,11 +49,11 @@ function SignUp(props) {
                     <InputGroup hasValidation>
                         <Form.Control
                             name="email"
-                            required
                             type="email"
                             placeholder="Enter Email"
                             value={formState.email}
                             onChange={onChange}
+                            required
                         />
                         <Form.Control.Feedback type="invalid" tooltip>
                             Please provide a valid email.
