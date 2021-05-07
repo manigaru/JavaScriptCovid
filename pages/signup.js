@@ -1,10 +1,28 @@
-import {Form, Button, Col, InputGroup} from 'react-bootstrap';
 import { useState } from 'react';
+import { connect } from 'react-redux';
+import { Form, Button, InputGroup } from 'react-bootstrap';
 
-export default function SignUp() {
+import { registerUser } from '../store/actions/authAction';
+
+function SignUp(props) {
+    const [formState, setFormState] = useState({
+        name: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+        pincode: "",
+        age: 0,
+        preferredVaccine: "ANY"
+    })
+
+    const onChange = (e) => {
+        setFormState({ ...formState, [e.target.name]: e.target.value });
+        console.log(formState)
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        props.registerUser(formState);
     }
 
     return (
@@ -18,6 +36,8 @@ export default function SignUp() {
                             required
                             type="text"
                             placeholder="Enter Name"
+                            value={formState.name}
+                            onChange={onChange}
                         />
                         <Form.Control.Feedback type="invalid" tooltip>
                             Please provide a valid name.
@@ -33,6 +53,8 @@ export default function SignUp() {
                             required
                             type="email"
                             placeholder="Enter Email"
+                            value={formState.email}
+                            onChange={onChange}
                         />
                         <Form.Control.Feedback type="invalid" tooltip>
                             Please provide a valid email.
@@ -44,13 +66,15 @@ export default function SignUp() {
                     <Form.Label>Password</Form.Label>
                     <InputGroup hasValidation>
                         <Form.Control
-                        name="password"
-                        type="password"
-                        placeholder="Password"
-                        required
+                            name="password"
+                            type="password"
+                            placeholder="Password"
+                            value={formState.password}
+                            onChange={onChange}
+                            required
                         />
                         <Form.Control.Feedback type="invalid" tooltip>
-                        Please enter your password.
+                            Please enter your password.
                         </Form.Control.Feedback>
                     </InputGroup>
                 </Form.Group>
@@ -59,13 +83,15 @@ export default function SignUp() {
                     <Form.Label>Confirm Password</Form.Label>
                     <InputGroup hasValidation>
                         <Form.Control
-                        name="confirmPassword"
-                        type="password"
-                        placeholder="Confirm Password"
-                        required
+                            name="confirmPassword"
+                            type="password"
+                            placeholder="Confirm Password"
+                            value={formState.confirmPassword}
+                            onChange={onChange}
+                            required
                         />
                         <Form.Control.Feedback type="invalid" tooltip>
-                        Please enter your password.
+                            Please enter your password.
                         </Form.Control.Feedback>
                     </InputGroup>
                 </Form.Group>
@@ -74,14 +100,16 @@ export default function SignUp() {
                     <Form.Label>Age</Form.Label>
                     <InputGroup hasValidation>
                         <Form.Control
-                        name="age"
-                        type="number"
-                        min="1"
-                        placeholder="Age"
-                        required
+                            name="age"
+                            type="number"
+                            min="1"
+                            placeholder="Age"
+                            value={formState.age}
+                            onChange={onChange}
+                            required
                         />
                         <Form.Control.Feedback type="invalid" tooltip>
-                        Please enter your age.
+                            Please enter your age.
                         </Form.Control.Feedback>
                     </InputGroup>
                 </Form.Group>
@@ -90,47 +118,53 @@ export default function SignUp() {
                     <Form.Label>Pincode</Form.Label>
                     <InputGroup hasValidation>
                         <Form.Control
-                        name="pincode" 
-                        pattern="[0-9]{6}" 
-                        maxlength="6"
-                        type="text"
-                        placeholder="Pincode"
-                        required
+                            name="pincode"
+                            pattern="[0-9]{6}"
+                            maxLength="6"
+                            type="text"
+                            placeholder="Pincode"
+                            value={formState.pincode}
+                            onChange={onChange}
+                            required
                         />
                         <Form.Control.Feedback type="invalid" tooltip>
-                        Please enter your age.
+                            Please enter your age.
                         </Form.Control.Feedback>
                     </InputGroup>
                 </Form.Group>
 
                 <fieldset>
                     <Form.Group>
-                    <Form.Label>
-                        Preffered vaccine
-                    </Form.Label>
-
-                    <Form.Check
-                        type="radio"
-                        label="Any"
-                        name="vaccine"
-                        id="any"
-                        value="any"
-                        checked
-                    />
-                    <Form.Check
-                        type="radio"
-                        label="Covishield"
-                        name="vaccine"
-                        value="covishield"
-                        id="covishield"
-                    />
-                    <Form.Check
-                        type="radio"
-                        label="Covaxin"
-                        name="vaccine"
-                        value="covaxin"
-                        id="covaxin"
-                    />
+                        <Form.Label>
+                            Preferred vaccine
+                        </Form.Label>
+                        <Form.Check
+                            type="radio"
+                            label="Any"
+                            name="preferredVaccine"
+                            id="any"
+                            value="ANY"
+                            checked={formState.preferredVaccine == "ANY"}
+                            onChange={onChange}
+                        />
+                        <Form.Check
+                            type="radio"
+                            label="Covishield"
+                            name="preferredVaccine"
+                            value="COVISHIELD"
+                            id="covishield"
+                            checked={formState.preferredVaccine == "COVISHIELD"}
+                            onChange={onChange}
+                        />
+                        <Form.Check
+                            type="radio"
+                            label="Covaxin"
+                            name="preferredVaccine"
+                            value="COVAXIN"
+                            id="covaxin"
+                            checked={formState.preferredVaccine == "COVAXIN"}
+                            onChange={onChange}
+                        />
                     </Form.Group>
                 </fieldset>
 
@@ -139,3 +173,17 @@ export default function SignUp() {
         </div>
     )
 }
+
+function mapStateToProps(state) {
+    return {
+        user: state.auth.result
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        registerUser: (data) => dispatch(registerUser(data))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
