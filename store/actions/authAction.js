@@ -8,7 +8,7 @@ export const registerUser = (data) => async dispatch => {
 
         let config = {
             method: 'POST',
-            url: 'http://vaccine-notifier-api.agarwal.work/api/register',
+            url: 'http://vaccine-notifier-api.agarwal.work/api/auth/register',
             data: data,
         }
 
@@ -31,24 +31,24 @@ export const loginUser = (data) => async dispatch => {
 
         let config = {
             method: 'POST',
-            url: 'http://vaccine-notifier-api.agarwal.work/api/login',
+            url: 'http://vaccine-notifier-api.agarwal.work/api/auth/login',
             data: data,
         }
 
         let user = await (await axios(config)).data;
 
         if (user.Token) {
-            axios.defaults.headers.common['Authorization'] = user.Token
+            axios.defaults.headers.common['Authorization'] = `Bearer ${user.Token}`
         } else {
             throw new Error("Token not found")
         }
 
-        let config1 = {
+        let userConfig = {
             method: 'GET',
-            url: 'http://vaccine-notifier-api.agarwal.work/api/user',
+            url: 'http://vaccine-notifier-api.agarwal.work/api/auth/user',
         }
 
-        let userData = await (await axios(config1)).data;
+        let userData = await (await axios(userConfig)).data;
         console.log(userData);
         await dispatch({
             type: 'SIGNIN_SUCCESS',
