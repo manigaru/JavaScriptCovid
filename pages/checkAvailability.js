@@ -12,7 +12,6 @@ function CheckAvailability(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(pincode, age);
         props.pincodeResults({ pincode, age });
     }
 
@@ -25,7 +24,7 @@ function CheckAvailability(props) {
                 </Form.Group>
                 <Form.Group>
                     <Form.Label>Age</Form.Label>
-                    <Form.Control type="number" placeholder="Age" value={age} onChange={e => setAge(e.target.value)} mid="1" required />
+                    <Form.Control type="number" placeholder="Age" value={age} onChange={e => setAge(e.target.value)} required />
                 </Form.Group>
 
                 <Button variant="primary" type="submit">

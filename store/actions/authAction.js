@@ -4,7 +4,7 @@ import axios from 'axios'
 export const registerUser = (data) => async dispatch => {
     try {
 
-        data.age = parseInt(data.age) // Had to. Couldnt find a better solution
+        data.age = parseInt(data.age);
 
         let config = {
             method: 'POST',
@@ -12,10 +12,10 @@ export const registerUser = (data) => async dispatch => {
             data: data,
         }
 
-        let user = await (await axios(config)).data;
+        await (await axios(config)).data;
         await dispatch({
             type: 'SIGNUP_SUCCESS',
-            result: user
+            userRegistered: true
         })
 
     } catch (error) {
@@ -37,20 +37,27 @@ export const loginUser = (data) => async dispatch => {
 
         let user = await (await axios(config)).data;
 
-        if (user.token) {
-            axios.defaults.headers.common['Authorization'] = user.token
+        if (user.Token) {
+            axios.defaults.headers.common['Authorization'] = user.Token
         } else {
             throw new Error("Token not found")
         }
 
+        let config1 = {
+            method: 'GET',
+            url: 'http://vaccine-notifier-api.agarwal.work/api/user',
+        }
+
+        let userData = await (await axios(config1)).data;
+        console.log(userData);
         await dispatch({
-            type: 'LOGIN_SUCCESS',
-            result: user
+            type: 'SIGNIN_SUCCESS',
+            user: userData
         })
 
     } catch (error) {
         await dispatch({
-            type: 'LOGIN_ERROR',
+            type: 'SIGNIN_ERROR',
             error: error
         })
     }

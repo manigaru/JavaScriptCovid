@@ -3,13 +3,13 @@ import moment from 'moment';
 
 export const pincodeResults = (data) => async dispatch => {
     try {
-        console.log("action called");
         const date = moment();
         let dateStr = date.format('DD-MM-YYYY');
-        console.log(dateStr, age, pincode);
+        let age = data.age;
+        let pincode = data.pincode;
         let config = {
             method: 'get',
-            url: `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByPin?pincode=${data.pincode}&date=${data.dateStr}`,
+            url: `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByPin?pincode=${pincode}&date=${dateStr}`,
         }
 
         let centers = await (await axios(config)).data.centers;

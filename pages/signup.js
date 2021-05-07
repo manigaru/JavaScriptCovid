@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { connect } from 'react-redux';
 import { Form, Button, InputGroup } from 'react-bootstrap';
 
+import SignUpConfirm from '../components/SignUpConfirm';
 import { registerUser } from '../store/actions/authAction';
 
 function SignUp(props) {
@@ -169,6 +170,7 @@ function SignUp(props) {
 
                 <Button type="submit">Register</Button>
             </Form>
+            <SignUpConfirm/>
         </div>
     )
 }
