@@ -8,7 +8,7 @@ export const registerUser = (data) => async dispatch => {
 
         let config = {
             method: 'POST',
-            url: 'http://vaccine-notifier-api.agarwal.work/api/auth/register',
+            url: 'https://vaccine-notifier-api.agarwal.work/api/auth/register',
             data: data,
         }
 
@@ -32,7 +32,7 @@ export const loginUser = (data) => async dispatch => {
         //sign in user
         let config = {
             method: 'POST',
-            url: 'http://vaccine-notifier-api.agarwal.work/api/auth/login',
+            url: 'https://vaccine-notifier-api.agarwal.work/api/auth/login',
             data: data,
         }
 
@@ -49,7 +49,7 @@ export const loginUser = (data) => async dispatch => {
         //load user using token
         let userConfig = {
             method: 'GET',
-            url: 'http://vaccine-notifier-api.agarwal.work/api/auth/user',
+            url: 'https://vaccine-notifier-api.agarwal.work/api/auth/user',
         }
 
         let userData = await (await axios(userConfig)).data;
@@ -72,7 +72,7 @@ export const loadUser = (data) => async dispatch => {
         //load user using token
         let userConfig = {
             method: 'GET',
-            url: 'http://vaccine-notifier-api.agarwal.work/api/auth/user',
+            url: 'https://vaccine-notifier-api.agarwal.work/api/auth/user',
             headers: {
                 'Authorization': `Bearer ${data}`
             }
@@ -83,7 +83,7 @@ export const loadUser = (data) => async dispatch => {
             type: 'SIGNIN_SUCCESS',
             user: userData
         })
-    } catch(error) {
+    } catch (error) {
         console.log(error);
         await dispatch({
             type: 'SIGNIN_ERROR',
