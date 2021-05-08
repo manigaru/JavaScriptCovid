@@ -9,6 +9,7 @@ import SignUp from '../components/SignUp';
 function Home(props) {
   useEffect(() => {
     if(props.user) {
+      console.log("storing user results");
       props.userResults({
           pincode: props.user.Pincode,
           age: props.user.Age,
@@ -16,7 +17,7 @@ function Home(props) {
       })
     }
   })
-  let loadScreen = props.user ? <UserAvailability slots={props.slots} user={props.user}/> : <SignUp/>
+  let loadScreen = props.user ? <UserAvailability user={props.user}/> : <SignUp/>
   return (
     <div className="container">
       <Head>
@@ -43,11 +44,25 @@ function mapDispatchToProps(dispatch) {
 }
 
 function areEqual(prevProps, nextProps) {
-  if(prevProps.user == nextProps.user && prevProps.slots == nextProps.slots) {
-    return true;
+  console.log(prevProps.user, nextProps.user);
+  if(prevProps.user != null) {
+    if((prevProps.user.Pincode == nextProps.user.Pincode) && (prevProps.user.Age == nextProps.user.Age) && (prevProps.user.PreferredVaccine == nextProps.user.PreferredVaccine)) {
+      console.log("same");
+      return true;
+    } else {
+      console.log("not same");
+      return false;
+    }
   } else {
-    return false;
+    if(prevProps.user == nextProps.user) {
+      console.log("same");
+      return true;
+    } else {
+      console.log("not same");
+      false;
+    }
   }
+  
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(React.memo(Home, areEqual));

@@ -5,13 +5,6 @@ import SlotDetails from './SlotDetails';
 import { userResults } from '../store/actions/availabilityAction';
 
 function UserAvailability(props) {
-    // useEffect(() => {
-    //     props.userResults({
-    //         pincode: props.user.Pincode,
-    //         age: props.user.Age,
-    //         vaccine: props.user.PreferredVaccine
-    //     })
-    // })
     return (
         <div>
             <div>
@@ -24,17 +17,10 @@ function UserAvailability(props) {
     )
 }
 
-// function mapStateToProps(state) {
-//     return {
-//         slots: state.availability.userResult,
-//         user: state.auth.user
-//     }
-// }
+function mapStateToProps(state) {
+    return {
+        slots: state.availability.userResult,
+    }
+}
 
-// function mapDispatchToProps(dispatch) {
-//     return {
-//         userResults: (data) => dispatch(userResults(data))
-//     }
-// }
-// export default connect(mapStateToProps, mapDispatchToProps)(UserAvailability);
-export default UserAvailability;
+export default connect(mapStateToProps)(UserAvailability);
