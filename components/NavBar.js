@@ -8,7 +8,7 @@ export default function NavBar() {
         <div>
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" className="w-100 fixed-top d-flex">
                 <Link href="/">
-                    <a>
+                    <a className="navbar-brand">
                         Covid19 Vaccine Notifier 
                     </a>
                 </Link>
@@ -16,25 +16,25 @@ export default function NavBar() {
                 <Navbar.Collapse id="responsive-navbar-nav" className="ml-auto">
                     <Nav className="ml-auto">
                         <Nav.Item>
-                            <Nav.Link active={router.pathname == "/checkAvailability" ? true : false}>
-                                <Link href="/checkAvailability"> 
+                            <Link href="/checkAvailability"> 
+                                <a className={"nav-link " +(router.pathname == "/checkAvailability" ? "active" : "")}>
                                     Check Availability 
-                                </Link>
-                            </Nav.Link>
+                                </a>
+                            </Link>
                         </Nav.Item>
                         <Nav.Item>
-                            <Nav.Link>
-                                <Link href="/signin">
-                                    Sign In 
-                                </Link>
-                            </Nav.Link>
+                            <Link href="/signin">
+                                <a className={"nav-link " +(router.pathname == "/signin" ? "active" : "")}>
+                                    Sign In
+                                </a> 
+                            </Link>
                         </Nav.Item>
                         <Nav.Item>
-                            <Nav.Link>
-                                <Link href="/signup">
-                                    Sign Up 
-                                </Link>
-                            </Nav.Link>
+                            <Link href="/signup">
+                                <a className={"nav-link " +(router.pathname == "/signup" ? "active" : "")}>
+                                    Sign Up
+                                </a> 
+                            </Link>
                         </Nav.Item>
                     </Nav>
                 </Navbar.Collapse>

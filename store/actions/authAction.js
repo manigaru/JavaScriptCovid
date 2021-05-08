@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-//load user
+//sign up user
 export const registerUser = (data) => async dispatch => {
     try {
 
@@ -26,9 +26,10 @@ export const registerUser = (data) => async dispatch => {
     }
 }
 
+//sign in user and load user
 export const loginUser = (data) => async dispatch => {
     try {
-
+        //sign in user
         let config = {
             method: 'POST',
             url: 'http://vaccine-notifier-api.agarwal.work/api/auth/login',
@@ -42,20 +43,48 @@ export const loginUser = (data) => async dispatch => {
         } else {
             throw new Error("Token not found")
         }
+        //store jwt token in local storage
+        localStorage.setItem('token', user.Token);
 
+        //load user using token
         let userConfig = {
             method: 'GET',
             url: 'http://vaccine-notifier-api.agarwal.work/api/auth/user',
         }
 
         let userData = await (await axios(userConfig)).data;
-        console.log(userData);
         await dispatch({
             type: 'SIGNIN_SUCCESS',
             user: userData
         })
 
     } catch (error) {
+        await dispatch({
+            type: 'SIGNIN_ERROR',
+            error: error
+        })
+    }
+}
+
+//load user
+export const loadUser = (data) => async dispatch => {
+    try {
+        //load user using token
+        let userConfig = {
+            method: 'GET',
+            url: 'http://vaccine-notifier-api.agarwal.work/api/auth/user',
+            headers: {
+                'Authorization': `Bearer ${data}`
+            }
+        }
+
+        let userData = await (await axios(userConfig)).data;
+        await dispatch({
+            type: 'SIGNIN_SUCCESS',
+            user: userData
+        })
+    } catch(error) {
+        console.log(error);
         await dispatch({
             type: 'SIGNIN_ERROR',
             error: error

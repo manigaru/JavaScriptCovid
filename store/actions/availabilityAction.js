@@ -17,7 +17,6 @@ export const pincodeResults = (data) => async dispatch => {
             element.sessions = element.sessions.filter(slot => slot.min_age_limit <= age && slot.available_capacity > 0)
         });
         centers = centers.filter(center => center.sessions.length > 0)
-        console.log(centers);
         await dispatch({
             type: 'CHECK_BY_PINCODE',
             result: centers
@@ -32,6 +31,7 @@ export const pincodeResults = (data) => async dispatch => {
 }
 export const userResults = (data) => async dispatch => {
     try {
+        console.log(data);
         const date = moment();
         let dateStr = date.format('DD-MM-YYYY');
         let age = data.age;
