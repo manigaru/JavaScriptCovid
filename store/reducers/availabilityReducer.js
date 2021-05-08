@@ -6,11 +6,13 @@ const availabilityReducer = (state = initialState, action) => {
     switch(action.type) {
         case 'CHECK_BY_PINCODE':
             return {
+                ...state,
                 result: action.result
             }
-        case 'CHECK_BY_DISTRICT':
+        case 'CHECK_BY_PINCODE_USER':
             return {
-                result: action.result
+                ...state,
+                userResult: action.result
             }
         case 'CHECK_ERROR':
             return {

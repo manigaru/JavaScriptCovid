@@ -45,7 +45,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        pincodeResults: (pincode) => dispatch(pincodeResults(pincode))
+        pincodeResults: (data) => dispatch(pincodeResults(data))
     }
 }
 
