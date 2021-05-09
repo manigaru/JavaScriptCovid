@@ -8,7 +8,7 @@ import UnauthenticatedLinks from './UnauthenticatedLinks';
 
 function NavBar(props) {
     const router = useRouter();
-    let authLinks = props.user ? <AuthenticatedLinks/> : <UnauthenticatedLinks/>
+    let authLinks = props.user ? <AuthenticatedLinks name={props.user.Name}/> : <UnauthenticatedLinks/>
     return (
         <div>
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" className="w-100 fixed-top d-flex">

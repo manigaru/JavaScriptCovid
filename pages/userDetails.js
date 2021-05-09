@@ -1,37 +1,30 @@
-import { useState } from 'react';
-import { connect } from 'react-redux';
 import { Form, Button, InputGroup } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
-import SignUpConfirm from './SignUpConfirm';
-import { registerUser } from '../store/actions/authAction';
-
-
-function SignUp(props) {
+function UserDetails(props) {
     const router = useRouter();
-    if(props.user) {
-        router.push('/');
-    }
-    
+    useEffect(() => {
+        if(!props.user) {
+            router.push('/');
+        }
+    })
     const [formState, setFormState] = useState({
-        name: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-        pincode: "",
-        age: 0,
-        preferredVaccine: "ANY"
+        name: props.user ? props.user.Name : null,
+        email: props.user ? props.user.Email : null,
+        pincode: props.user ? props.user.Pincode : null,
+        age: props.user ? props.user.Age : null,
+        preferredVaccine: props.user ? props.user.PreferredVaccine : null
     })
 
     const onChange = (e) => {
         setFormState({ ...formState, [e.target.name]: e.target.value });
     }
-
+    
     const handleSubmit = (e) => {
         e.preventDefault();
-        props.registerUser(formState);
     }
-
     return (
         <div className="d-flex justify-content-center mb-5">
             <Form onSubmit={handleSubmit} className="col-xs-12 col-md-8 col-lg-6">
@@ -41,14 +34,9 @@ function SignUp(props) {
                         <Form.Control
                             name="name"
                             type="text"
-                            placeholder="Enter Name"
                             value={formState.name}
-                            onChange={onChange}
-                            required
+                            readOnly
                         />
-                        <Form.Control.Feedback type="invalid" tooltip>
-                            Please provide a valid name.
-                        </Form.Control.Feedback>
                     </InputGroup>
                 </Form.Group>
 
@@ -58,48 +46,9 @@ function SignUp(props) {
                         <Form.Control
                             name="email"
                             type="email"
-                            placeholder="Enter Email"
                             value={formState.email}
-                            onChange={onChange}
-                            required
+                            readOnly
                         />
-                        <Form.Control.Feedback type="invalid" tooltip>
-                            Please provide a valid email.
-                        </Form.Control.Feedback>
-                    </InputGroup>
-                </Form.Group>
-
-                <Form.Group>
-                    <Form.Label>Password</Form.Label>
-                    <InputGroup hasValidation>
-                        <Form.Control
-                            name="password"
-                            type="password"
-                            placeholder="Password"
-                            value={formState.password}
-                            onChange={onChange}
-                            required
-                        />
-                        <Form.Control.Feedback type="invalid" tooltip>
-                            Please enter your password.
-                        </Form.Control.Feedback>
-                    </InputGroup>
-                </Form.Group>
-
-                <Form.Group>
-                    <Form.Label>Confirm Password</Form.Label>
-                    <InputGroup hasValidation>
-                        <Form.Control
-                            name="confirmPassword"
-                            type="password"
-                            placeholder="Confirm Password"
-                            value={formState.confirmPassword}
-                            onChange={onChange}
-                            required
-                        />
-                        <Form.Control.Feedback type="invalid" tooltip>
-                            Please enter your password.
-                        </Form.Control.Feedback>
                     </InputGroup>
                 </Form.Group>
 
@@ -175,23 +124,15 @@ function SignUp(props) {
                     </Form.Group>
                 </fieldset>
 
-                <Button type="submit">Register</Button>
+                <Button type="submit">Save Changes</Button>
+                <Button className="ml-3" variant="outline-primary">Cancel</Button>
             </Form>
-            <SignUpConfirm/>
         </div>
     )
 }
-
 function mapStateToProps(state) {
     return {
         user: state.auth.user
     }
 }
-
-function mapDispatchToProps(dispatch) {
-    return {
-        registerUser: (data) => dispatch(registerUser(data))
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
+export default connect(mapStateToProps)(UserDetails);

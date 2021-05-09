@@ -81,13 +81,13 @@ export const loadUser = (data) => async dispatch => {
         let userData = await (await axios(userConfig)).data;
         await dispatch({
             type: 'SIGNIN_SUCCESS',
-            user: userData
+            user: userData,
         })
     } catch (error) {
         console.log(error);
         await dispatch({
             type: 'SIGNIN_ERROR',
-            error: error
+            error: error,
         })
     }
 }
@@ -103,18 +103,5 @@ export const logOut = () => async dispatch => {
             type: 'LOGOUT_ERROR',
             error: error
         })
-    }
-}
-export const authLoaded = () => async dispatch => {
-    try {
-        await dispatch({
-            type: 'AUTH_LOADED'
-        })
-    } catch (error) {
-        // console.log(error);
-        // await dispatch({
-        //     type: 'SIGNIN_ERROR',
-        //     error: error
-        // })
     }
 }
