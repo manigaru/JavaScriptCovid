@@ -91,3 +91,30 @@ export const loadUser = (data) => async dispatch => {
         })
     }
 }
+export const logOut = () => async dispatch => {
+    try {
+        localStorage.removeItem('token');
+        await dispatch({
+            type: 'LOGOUT_SUCCESS',
+        })
+    } catch (error) {
+        console.log(error);
+        await dispatch({
+            type: 'LOGOUT_ERROR',
+            error: error
+        })
+    }
+}
+export const authLoaded = () => async dispatch => {
+    try {
+        await dispatch({
+            type: 'AUTH_LOADED'
+        })
+    } catch (error) {
+        // console.log(error);
+        // await dispatch({
+        //     type: 'SIGNIN_ERROR',
+        //     error: error
+        // })
+    }
+}

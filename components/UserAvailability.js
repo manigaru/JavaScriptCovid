@@ -5,6 +5,16 @@ import SlotDetails from './SlotDetails';
 import { userResults } from '../store/actions/availabilityAction';
 
 function UserAvailability(props) {
+    useEffect(() => {
+        if(props.user) {
+          console.log("storing user results");
+          props.userResults({
+              pincode: props.user.Pincode,
+              age: props.user.Age,
+              vaccine: props.user.PreferredVaccine
+          })
+        }
+      })
     return (
         <div>
             <div>
@@ -19,8 +29,35 @@ function UserAvailability(props) {
 
 function mapStateToProps(state) {
     return {
-        slots: state.availability.userResult,
+        user: state.auth.user,
+        slots: state.availability.userResult
     }
-}
-
-export default connect(mapStateToProps)(UserAvailability);
+  }
+  function mapDispatchToProps(dispatch) {
+    return {
+        userResults: (data) => dispatch(userResults(data))
+    }
+  }
+  
+  function areEqual(prevProps, nextProps) {
+    console.log(prevProps, nextProps);
+    if(prevProps.user != null) {
+      if((prevProps.user.Pincode == nextProps.user.Pincode) && (prevProps.user.Age == nextProps.user.Age) && (prevProps.user.PreferredVaccine == nextProps.user.PreferredVaccine) && (prevProps.slots != undefined && nextProps.slots != undefined && prevProps.slots.length == nextProps.slots.length)) {
+        console.log("same");
+        return true;
+      } else {
+        console.log("not same");
+        return false;
+      }
+    } else {
+      if(prevProps.user == nextProps.user) {
+        console.log("same");
+        return true;
+      } else {
+        console.log("not same");
+        false;
+      }
+    }
+    
+  }
+export default connect(mapStateToProps, mapDispatchToProps)(React.memo(UserAvailability, areEqual));

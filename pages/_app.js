@@ -4,15 +4,15 @@ import { Provider } from 'react-redux';
 import { createWrapper } from 'next-redux-wrapper';
 import store from '../store/store';
 import Layout from '../components/Layout';
-import { loadUser } from '../store/actions/authAction';
+import { authLoaded, loadUser } from '../store/actions/authAction';
+import { Spinner } from 'react-bootstrap';
 
 class MyApp extends App {
 
     componentDidMount() {
         if(localStorage.getItem('token')) {
             store.dispatch(loadUser(localStorage.getItem('token')));
-            // console.log(loadUser);  
-            console.log(localStorage.getItem('token'));
+            store.dispatch(authLoaded());
         }
     }
     render() {

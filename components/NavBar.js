@@ -1,9 +1,14 @@
+import { connect } from 'react-redux';
 import {Navbar, Nav} from 'react-bootstrap';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 
-export default function NavBar() {
+import AuthenticatedLinks from './AuthenticatedLinks';
+import UnauthenticatedLinks from './UnauthenticatedLinks';
+
+function NavBar(props) {
     const router = useRouter();
+    let authLinks = props.user ? <AuthenticatedLinks/> : <UnauthenticatedLinks/>
     return (
         <div>
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" className="w-100 fixed-top d-flex">
@@ -22,20 +27,7 @@ export default function NavBar() {
                                 </a>
                             </Link>
                         </Nav.Item>
-                        <Nav.Item>
-                            <Link href="/signin">
-                                <a className={"nav-link " +(router.pathname == "/signin" ? "active" : "")}>
-                                    Sign In
-                                </a> 
-                            </Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                            <Link href="/signup">
-                                <a className={"nav-link " +(router.pathname == "/signup" ? "active" : "")}>
-                                    Sign Up
-                                </a> 
-                            </Link>
-                        </Nav.Item>
+                        {authLinks}
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
@@ -44,3 +36,10 @@ export default function NavBar() {
         </div>
     )
 }
+
+function mapStateToProps(state) {
+    return {
+        user: state.auth.user
+    }
+}
+export default connect(mapStateToProps)(NavBar);

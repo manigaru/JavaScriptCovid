@@ -4,8 +4,14 @@ import { Form, Button, InputGroup } from 'react-bootstrap';
 
 import SignUpConfirm from './SignUpConfirm';
 import { registerUser } from '../store/actions/authAction';
+import { useRouter } from 'next/router';
 
 function SignUp(props) {
+    const router = useRouter();
+    if(props.user) {
+        router.push('/');
+    }
+    
     const [formState, setFormState] = useState({
         name: "",
         email: "",
@@ -177,7 +183,7 @@ function SignUp(props) {
 
 function mapStateToProps(state) {
     return {
-        user: state.auth.result
+        user: state.auth.user
     }
 }
 

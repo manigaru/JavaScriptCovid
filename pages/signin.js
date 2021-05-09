@@ -3,8 +3,13 @@ import { connect } from 'react-redux';
 import { Form, Button } from 'react-bootstrap';
 
 import { loginUser } from '../store/actions/authAction';
+import { useRouter } from 'next/router';
 
 function SignIn(props) {
+    const router = useRouter();
+    if(props.user) {
+        router.push('/');
+    }
     const [formState, setFormState] = useState({
         email: "",
         password: "",
@@ -56,7 +61,7 @@ function SignIn(props) {
 
 function mapStateToProps(state) {
     return {
-        token: state.auth.result
+        user: state.auth.user
     }
 }
 
