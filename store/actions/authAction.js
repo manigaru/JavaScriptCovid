@@ -105,3 +105,31 @@ export const logOut = () => async dispatch => {
         })
     }
 }
+
+export const updateUser = (data) => async dispatch => {
+    try {
+        data.age = parseInt(data.age);
+        let token = localStorage.getItem('token');
+        let userConfig = {
+            method: 'PATCH',
+            url: 'https://vaccine-notifier-api.agarwal.work/api/auth/user',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            data: data
+        }
+
+        let userData = await (await axios(userConfig)).data;
+        await dispatch({
+            type: 'UPDATE_USER_SUCCESS',
+            user: userData
+        })
+    } catch(error) {
+        console.log(error);
+        await dispatch({
+            type: 'UPDATE_USER_ERROR',
+            error: error
+        })
+    }
+}

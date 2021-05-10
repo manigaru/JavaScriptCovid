@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
+// import Alert from '../components/Alert';
+import { updateUser } from '../store/actions/authAction';
+
 function UserDetails(props) {
     const router = useRouter();
     useEffect(() => {
@@ -11,12 +14,13 @@ function UserDetails(props) {
         }
     })
     const [formState, setFormState] = useState({
-        name: props.user ? props.user.Name : null,
-        email: props.user ? props.user.Email : null,
         pincode: props.user ? props.user.Pincode : null,
         age: props.user ? props.user.Age : null,
-        preferredVaccine: props.user ? props.user.PreferredVaccine : null
+        preferredVaccine: props.user ? props.user.PreferredVaccine : null,
+        isSubscribed: props.user.IsSubscribed
     })
+
+    // const [alertState, setAlertState] = useState(false);
 
     const onChange = (e) => {
         setFormState({ ...formState, [e.target.name]: e.target.value });
@@ -24,6 +28,8 @@ function UserDetails(props) {
     
     const handleSubmit = (e) => {
         e.preventDefault();
+        // setAlertState(true);
+        props.updateUser(formState)
     }
     return (
         <div className="d-flex justify-content-center mb-5">
@@ -34,7 +40,7 @@ function UserDetails(props) {
                         <Form.Control
                             name="name"
                             type="text"
-                            value={formState.name}
+                            value={props.user.Name}
                             readOnly
                         />
                     </InputGroup>
@@ -46,7 +52,7 @@ function UserDetails(props) {
                         <Form.Control
                             name="email"
                             type="email"
-                            value={formState.email}
+                            value={props.user.Email}
                             readOnly
                         />
                     </InputGroup>
@@ -127,12 +133,20 @@ function UserDetails(props) {
                 <Button type="submit">Save Changes</Button>
                 <Button className="ml-3" variant="outline-primary">Cancel</Button>
             </Form>
+            {/* <Alert show={alertState}/> */}
         </div>
     )
 }
+
 function mapStateToProps(state) {
     return {
         user: state.auth.user
     }
 }
-export default connect(mapStateToProps)(UserDetails);
+
+function mapDispatchToProps(dispatch) {
+    return {
+        updateUser: (data) => dispatch(updateUser(data))
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(UserDetails);

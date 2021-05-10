@@ -31,12 +31,11 @@ export const pincodeResults = (data) => async dispatch => {
 }
 export const userResults = (data) => async dispatch => {
     try {
-        console.log(data);
         const date = moment();
         let dateStr = date.format('DD-MM-YYYY');
         let age = data.age;
         let pincode = data.pincode;
-        let preferredVaccine = data.preferredVaccine;
+        let preferredVaccine = data.vaccine;
         let config = {
             method: 'get',
             url: `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByPin?pincode=${pincode}&date=${dateStr}`,
