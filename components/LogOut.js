@@ -7,9 +7,9 @@ function LogOut(props) {
         props.logOut();
     }
     return (
-        <Nav.Item className="ml-lg-2">
-            <Button onClick={handleClick}>Log Out</Button>
-        </Nav.Item>
+        <Button type="button" className="dropdown-item" onClick={handleClick}>
+            Log Out
+        </Button>
     )
 }
 

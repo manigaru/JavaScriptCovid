@@ -17,19 +17,24 @@ function UserDetails(props) {
         pincode: props.user ? props.user.Pincode : null,
         age: props.user ? props.user.Age : null,
         preferredVaccine: props.user ? props.user.PreferredVaccine : null,
-        isSubscribed: props.user.IsSubscribed
+        isSubscribed: props.user ? props.user.IsSubscribed : null
     })
 
     // const [alertState, setAlertState] = useState(false);
 
     const onChange = (e) => {
-        setFormState({ ...formState, [e.target.name]: e.target.value });
+        if(e.target.name == 'isSubscribed') {
+            setFormState({ ...formState, [e.target.name]: !formState.isSubscribed});
+        } else {
+            setFormState({ ...formState, [e.target.name]: e.target.value });
+        }
     }
     
     const handleSubmit = (e) => {
         e.preventDefault();
         // setAlertState(true);
         props.updateUser(formState)
+        console.log(formState);
     }
     return (
         <div className="d-flex justify-content-center mb-5">
@@ -129,9 +134,11 @@ function UserDetails(props) {
                         />
                     </Form.Group>
                 </fieldset>
-
+                <Form.Group>
+                    <Form.Check name="isSubscribed" label="Subscribe" checked={formState.isSubscribed} onChange={onChange}/>
+                </Form.Group>
                 <Button type="submit">Save Changes</Button>
-                <Button className="ml-3" variant="outline-primary">Cancel</Button>
+                <Button className="ml-3" variant="outline-primary" onClick={() => router.back()}>Cancel</Button>
             </Form>
             {/* <Alert show={alertState}/> */}
         </div>

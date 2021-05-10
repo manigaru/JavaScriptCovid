@@ -133,3 +133,26 @@ export const updateUser = (data) => async dispatch => {
         })
     }
 }
+
+export const updatePassword = (data) => async dispatch => {
+    try {
+        let config = {
+            method: 'POST',
+            url: 'https://vaccine-notifier-api.agarwal.work/api/auth/reset_password',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: data
+        }
+        await axios(config);
+        await dispatch({
+            type: 'UPDATE_PASS_SUCCESS',
+        })
+    } catch(error) {
+        console.log(error);
+        await dispatch({
+            type: 'UPDATE_PASS_ERROR',
+            error: error
+        })
+    }
+}   

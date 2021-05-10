@@ -1,20 +1,24 @@
-import LogOut from './LogOut';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { Nav } from 'react-bootstrap';
+import { Nav, NavDropdown } from 'react-bootstrap';
+
+import LogOut from './LogOut';
+import ProfileIcon from './ProfileIcon';
 
 export default function AuthenticatedLinks(props) {
     const router = useRouter();
+    let name = JSON.stringify(props.name);
+
     return (
         <>
-            <Nav.Item>
+            <NavDropdown title={props.name} id="collasible-nav-dropdown" className={(router.pathname == "/userDetails" ? "active" : "")}>
                 <Link href="/userDetails">
-                    <a className={"nav-link " +(router.pathname == "/userDetails" ? "active" : "")}>
-                        {props.name}
-                    </a> 
+                    <a className="dropdown-item">Edit Preferences</a>
                 </Link>
-            </Nav.Item>
-            <LogOut/>
+                <div class="dropdown-divider"></div>
+                <LogOut/>
+            </NavDropdown>
+            {/* <LogOut/> */}
         </>
     )
 }

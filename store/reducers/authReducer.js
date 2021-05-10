@@ -53,7 +53,16 @@ const authReducer = (state = intialState, action) => {
         case 'UPDATE_USER_ERROR':
             return {
                 ...state,
-                updateError: action.error
+                updateUserError: action.error
+            }
+        case 'UPDATE_PASS_SUCCESS':
+            return {
+                ...state
+            }
+        case 'UPDATE_PASS_ERROR': 
+            return {
+                ...state,
+                updatePassError: action.error
             }
         default:
             return state
