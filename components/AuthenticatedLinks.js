@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 import { Nav, NavDropdown } from 'react-bootstrap';
 
 import LogOut from './LogOut';
-import ProfileIcon from './ProfileIcon';
 
 export default function AuthenticatedLinks(props) {
     const router = useRouter();
