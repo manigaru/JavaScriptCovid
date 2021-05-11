@@ -1,7 +1,5 @@
 import { connect } from 'react-redux';
-import { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import { useRouter } from 'next/router';
 import Link from 'next/link';
 
 function SignUpConfirm(props) {
@@ -28,7 +26,7 @@ function SignUpConfirm(props) {
                 <Modal.Footer>
                 <Button variant="secondary">
                     <Link href="signin">
-                        <a>
+                        <a style={{textDecoration: "none", color: "#ffffff"}}>
                             Proceed To Sign In
                         </a>
                     </Link>

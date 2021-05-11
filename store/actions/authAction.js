@@ -1,4 +1,5 @@
-import axios from 'axios'
+import axios from 'axios';
+import { setAlert } from './alertAction';
 
 //sign up user
 export const registerUser = (data) => async dispatch => {
@@ -17,12 +18,21 @@ export const registerUser = (data) => async dispatch => {
             type: 'SIGNUP_SUCCESS',
             userRegistered: true
         })
+        dispatch(setAlert({
+            alertType: 'success',
+            content: 'Registered successfully'
+        }))
 
     } catch (error) {
+        console.log(error.response.data);
         await dispatch({
             type: 'SIGNUP_ERROR',
             error: error
         })
+        dispatch(setAlert({
+            alertType: 'danger',
+            content: error.response.data
+        }))
     }
 }
 
@@ -58,11 +68,21 @@ export const loginUser = (data) => async dispatch => {
             user: userData
         })
 
+        dispatch(setAlert({
+            alertType: 'success',
+            content: 'Signed in successfully'
+        }))
+
     } catch (error) {
+        console.log(error.response.data);
         await dispatch({
             type: 'SIGNIN_ERROR',
             error: error
         })
+        dispatch(setAlert({
+            alertType: 'danger',
+            content: error.response.data
+        }))
     }
 }
 
@@ -97,6 +117,10 @@ export const logOut = () => async dispatch => {
         await dispatch({
             type: 'LOGOUT_SUCCESS',
         })
+        dispatch(setAlert({
+            alertType: 'success',
+            content: 'Logged out successfully'
+        }))
     } catch (error) {
         console.log(error);
         await dispatch({
@@ -108,7 +132,6 @@ export const logOut = () => async dispatch => {
 
 export const updateUser = (data) => async dispatch => {
     try {
-        data.age = parseInt(data.age);
         let token = localStorage.getItem('token');
         let userConfig = {
             method: 'PATCH',
@@ -125,12 +148,20 @@ export const updateUser = (data) => async dispatch => {
             type: 'UPDATE_USER_SUCCESS',
             user: userData
         })
+        dispatch(setAlert({
+            alertType: 'success',
+            content: 'Details updated successfully'
+        }))
     } catch(error) {
-        console.log(error);
+        console.log(error.response.data);
         await dispatch({
             type: 'UPDATE_USER_ERROR',
             error: error
         })
+        dispatch(setAlert({
+            alertType: 'danger',
+            content: error.response.data
+        }))
     }
 }
 
@@ -148,11 +179,19 @@ export const updatePassword = (data) => async dispatch => {
         await dispatch({
             type: 'UPDATE_PASS_SUCCESS',
         })
+        dispatch(setAlert({
+            alertType: 'success',
+            content: 'Check your mail to reset password'
+        }))
     } catch(error) {
         console.log(error);
         await dispatch({
             type: 'UPDATE_PASS_ERROR',
             error: error
         })
+        dispatch(setAlert({
+            alertType: 'danger',
+            content: error.response.data
+        }))
     }
 }   

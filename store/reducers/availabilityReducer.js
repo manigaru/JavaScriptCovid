@@ -1,5 +1,3 @@
-import checkAvailability from "../../pages/checkAvailability";
-
 const initialState = {}
 
 const availabilityReducer = (state = initialState, action) => {
