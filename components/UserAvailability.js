@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { useEffect } from 'react';
+import { Row, Col } from 'react-bootstrap';
 
 import SlotDetails from './SlotDetails';
 import { userResults } from '../store/actions/availabilityAction';
@@ -18,53 +19,40 @@ function UserAvailability(props) {
     return (
       <>
         <div>
-            <div className="availabilityContainer d-flex flex-row justify-content-between">
+            <Row className="availabilityContainer p-1 p-md-5" style={{backgroundColor: "var(--light)", borderRadius: "0.7rem"}}>
               
-              <div id="pincode" className="d-flex flex-column justify-content-center align-items-center">
-                <div className="d-flex align-items-center">
+              <Col id="pincode" className="d-flex flex-column justify-content-center align-items-center">
+                <div className="d-flex align-items-center flex-column flex-md-row">
                   <img className="availabilityImg" src="/pincode.svg"/>
-                  <h5 className="availabilityHeading">Pincode</h5>
+                  <h5 className="availabilityHeading text-center ml-md-2">Pincode</h5>
                 </div>
                 <div className="availabilityValue pt-2">{props.user.Pincode}</div>
-              </div>
+              </Col>
 
-              <div id="age" className="d-flex flex-column justify-content-center align-items-center">
-                <div className="d-flex align-items-center">
+              <Col id="age" className="d-flex flex-column justify-content-center align-items-center">
+                <div className="d-flex align-items-center flex-column flex-md-row">
                   <img className="availabilityImg" src="/age.svg"/>
-                  <h5 className="availabilityHeading">Age</h5>
+                  <h5 className="availabilityHeading text-center ml-md-2">Age</h5>
                 </div>
                 <div className="availabilityValue pt-2">{props.user.Age}</div>
-              </div>
+              </Col>
 
-              <div id="preferredVaccine" className="d-flex flex-column justify-content-center align-items-center">
-                <div className="d-flex align-items-center">
+              <Col id="preferredVaccine" className="d-flex flex-column justify-content-center align-items-center">
+                <div className="d-flex align-items-center flex-column flex-md-row justify-content-center">
                   <img className="availabilityImg" src="/vaccine.svg"/>
-                  <h5 className="availabilityHeading">Preferred Vaccine</h5>
+                  <h5 className="availabilityHeading text-center ml-md-2">Preferred Vaccine</h5>
                 </div>
                 <div className="availabilityValue pt-2">{props.user.PreferredVaccine}</div>
-              </div>
-
-                {/* <p>Pincode: {props.user.Pincode}</p>
-                <p>Age: {props.user.Age}</p>
-                <p>Preferred Vaccine: {props.user.PreferredVaccine}</p> */}
-            </div>
+              </Col>
+            </Row>
             <SlotDetails slots={props.slots} />
         </div>
         <style jsx>{`
-          .availabilityContainer {
-            background-color: var(--light);
-            border-radius: 0.7rem;
-            padding: 3rem;
-          }
           .availabilityImg {
             width: 1rem;
           }
           .availabilityHeading {
-            margin-left: 1rem;
             margin-bottom: 0;
-          }
-          .availabilityValue {
-            font-size: 1.3rem;
           }
         `}</style>
       </>
