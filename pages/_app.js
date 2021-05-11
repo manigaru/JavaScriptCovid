@@ -5,7 +5,7 @@ import { createWrapper } from 'next-redux-wrapper';
 import store from '../store/store';
 import Layout from '../components/Layout';
 import { loadUser } from '../store/actions/authAction';
-import { Spinner } from 'react-bootstrap';
+import '../styles/globalStyle.css';
 
 class MyApp extends App {
 

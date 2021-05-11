@@ -18,7 +18,7 @@ function SlotDetails({slots}) {
         ) 
     } else if(slots != undefined && slots.length == 0) {
         return (
-            <h3 className="mt-4">No Slots Available</h3>
+            <h3 className="mt-4 text-center">No Slots Available</h3>
         )
     } else {
         return (

@@ -7,7 +7,7 @@ function LogOut(props) {
         props.logOut();
     }
     return (
-        <Button type="button" className="dropdown-item" onClick={handleClick}>
+        <Button type="button" variant="light" className="dropdown-item" onClick={handleClick}>
             Log Out
         </Button>
     )

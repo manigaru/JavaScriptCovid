@@ -16,14 +16,58 @@ function UserAvailability(props) {
         }
       })
     return (
+      <>
         <div>
-            <div>
-                <p>Pincode: {props.user.Pincode}</p>
+            <div className="availabilityContainer d-flex flex-row justify-content-between">
+              
+              <div id="pincode" className="d-flex flex-column justify-content-center align-items-center">
+                <div className="d-flex align-items-center">
+                  <img className="availabilityImg" src="/pincode.svg"/>
+                  <h5 className="availabilityHeading">Pincode</h5>
+                </div>
+                <div className="availabilityValue pt-2">{props.user.Pincode}</div>
+              </div>
+
+              <div id="age" className="d-flex flex-column justify-content-center align-items-center">
+                <div className="d-flex align-items-center">
+                  <img className="availabilityImg" src="/age.svg"/>
+                  <h5 className="availabilityHeading">Age</h5>
+                </div>
+                <div className="availabilityValue pt-2">{props.user.Age}</div>
+              </div>
+
+              <div id="preferredVaccine" className="d-flex flex-column justify-content-center align-items-center">
+                <div className="d-flex align-items-center">
+                  <img className="availabilityImg" src="/vaccine.svg"/>
+                  <h5 className="availabilityHeading">Preferred Vaccine</h5>
+                </div>
+                <div className="availabilityValue pt-2">{props.user.PreferredVaccine}</div>
+              </div>
+
+                {/* <p>Pincode: {props.user.Pincode}</p>
                 <p>Age: {props.user.Age}</p>
-                <p>Preferred Vaccine: {props.user.PreferredVaccine}</p>
+                <p>Preferred Vaccine: {props.user.PreferredVaccine}</p> */}
             </div>
             <SlotDetails slots={props.slots} />
         </div>
+        <style jsx>{`
+          .availabilityContainer {
+            background-color: var(--light);
+            border-radius: 0.7rem;
+            padding: 3rem;
+          }
+          .availabilityImg {
+            width: 1rem;
+          }
+          .availabilityHeading {
+            margin-left: 1rem;
+            margin-bottom: 0;
+          }
+          .availabilityValue {
+            font-size: 1.3rem;
+          }
+        `}</style>
+      </>
     )
 }
 
