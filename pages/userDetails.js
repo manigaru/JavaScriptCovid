@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
-// import Alert from '../components/Alert';
 import { updateUser } from '../store/actions/authAction';
 
 function UserDetails(props) {
@@ -13,18 +12,17 @@ function UserDetails(props) {
             router.push('/');
         }
     })
+
     const [formState, setFormState] = useState({
-        pincode: props.user ? props.user.Pincode : null,
-        age: props.user ? props.user.Age : null,
-        preferredVaccine: props.user ? props.user.PreferredVaccine : null,
-        isSubscribed: props.user ? props.user.IsSubscribed : null
+        Pincode: props.user ? props.user.Pincode : null,
+        Age: props.user ? props.user.Age : null,
+        PreferredVaccine: props.user ? props.user.PreferredVaccine : null,
+        IsSubscribed: props.user ? props.user.IsSubscribed : null
     })
 
-    // const [alertState, setAlertState] = useState(false);
-
     const onChange = (e) => {
-        if(e.target.name == 'isSubscribed') {
-            setFormState({ ...formState, [e.target.name]: !formState.isSubscribed});
+        if(e.target.name == 'IsSubscribed') {
+            setFormState({ ...formState, [e.target.name]: !formState.IsSubscribed});
         } else {
             setFormState({ ...formState, [e.target.name]: e.target.value });
         }
@@ -67,11 +65,11 @@ function UserDetails(props) {
                     <Form.Label>Age</Form.Label>
                     <InputGroup hasValidation>
                         <Form.Control
-                            name="age"
+                            name="Age"
                             type="number"
                             min="1"
                             placeholder="Age"
-                            value={formState.age}
+                            value={formState.Age}
                             onChange={onChange}
                             required
                         />
@@ -85,12 +83,12 @@ function UserDetails(props) {
                     <Form.Label>Pincode</Form.Label>
                     <InputGroup hasValidation>
                         <Form.Control
-                            name="pincode"
+                            name="Pincode"
                             pattern="[0-9]{6}"
                             maxLength="6"
                             type="text"
                             placeholder="Pincode"
-                            value={formState.pincode}
+                            value={formState.Pincode}
                             onChange={onChange}
                             required
                         />
@@ -108,39 +106,38 @@ function UserDetails(props) {
                         <Form.Check
                             type="radio"
                             label="Any"
-                            name="preferredVaccine"
+                            name="PreferredVaccine"
                             id="any"
                             value="ANY"
-                            checked={formState.preferredVaccine == "ANY"}
+                            checked={formState.PreferredVaccine == "ANY"}
                             onChange={onChange}
                         />
                         <Form.Check
                             type="radio"
                             label="Covishield"
-                            name="preferredVaccine"
+                            name="PreferredVaccine"
                             value="COVISHIELD"
                             id="covishield"
-                            checked={formState.preferredVaccine == "COVISHIELD"}
+                            checked={formState.PreferredVaccine == "COVISHIELD"}
                             onChange={onChange}
                         />
                         <Form.Check
                             type="radio"
                             label="Covaxin"
-                            name="preferredVaccine"
+                            name="PreferredVaccine"
                             value="COVAXIN"
                             id="covaxin"
-                            checked={formState.preferredVaccine == "COVAXIN"}
+                            checked={formState.PreferredVaccine == "COVAXIN"}
                             onChange={onChange}
                         />
                     </Form.Group>
                 </fieldset>
                 <Form.Group>
-                    <Form.Check name="isSubscribed" label="Subscribe" checked={formState.isSubscribed} onChange={onChange}/>
+                    <Form.Check name="IsSubscribed" label="Subscribe to email notifications" checked={formState.IsSubscribed} onChange={onChange}/>
                 </Form.Group>
                 <Button type="submit">Save Changes</Button>
                 <Button className="ml-3" variant="outline-primary" onClick={() => router.back()}>Cancel</Button>
             </Form>
-            {/* <Alert show={alertState}/> */}
         </div>
     )
 }
