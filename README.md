@@ -1,30 +1,18 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/zeit/next.js/tree/canary/packages/create-next-app).
+# Covid19 Vaccine Notifier
+Register with your email id and get notification for the available slots
 
-## Getting Started
+![image](https://user-images.githubusercontent.com/48154641/118699546-470dea00-b82f-11eb-85d6-19037ac8daf3.png)  
+---
 
-First, run the development server:
+You can also use check availability option to see the available slots.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+![image](https://user-images.githubusercontent.com/48154641/118700176-01055600-b830-11eb-9da4-e1cca3e0ee5c.png)
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Edit preferences 
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+![ss](https://user-images.githubusercontent.com/48154641/118702583-bdf8b200-b832-11eb-8da0-c2a105cacb87.png)
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/zeit/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
